@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import java.util.Map;
+ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentSkipListSet;
@@ -69,10 +69,22 @@ public class CreativeUnitIndex implements IndexAware<String,CreativeUnitObject> 
     @Override
     public void update(String key, CreativeUnitObject value) {
 
+        log.info("CreativeUnitIndex is not support update");
+
     }
 
     @Override
     public void delete(String key, CreativeUnitObject value) {
-
+        log.info("before delete: {}",objectMap);
+        objectMap.remove(key);
+        Set<Long> unitSet = creativeUintMap.get(value.getAdId());
+        if(CollectionUtils.isEmpty(unitSet)){
+            unitSet.remove(value.getUnitId());
+        }
+        Set<Long> creativeSet = unitCreativeMap.get(value.getUnitId());
+        if(CollectionUtils.isEmpty(creativeSet)){
+            creativeSet.remove(value.getAdId());
+        }
+        log.info("after delete: {}",objectMap);
     }
 }
