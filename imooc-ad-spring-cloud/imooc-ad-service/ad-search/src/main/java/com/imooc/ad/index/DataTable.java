@@ -1,6 +1,5 @@
 package com.imooc.ad.index;
 
-import com.imooc.ad.index.creativeunit.CreativeUnitIndex;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
